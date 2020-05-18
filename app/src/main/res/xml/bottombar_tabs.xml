@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+   <tabs>
+       <tab
+           id="@+id/tab_home"
+           icon="@drawable/ic_home_icon"
+           title="홈" />
+       <tab
+           id="@+id/tab_star"
+           icon="@drawable/ic_star_icon"
+           title="즐겨찾기" />
+       <tab
+           id="@+id/tab_info"
+           icon="@drawable/ic_info_icon"
+           title="주변정보" />
+       <tab
+           id="@+id/tab_feedback"
+           icon="@drawable/ic_feedback_icon"
+           title="피드백" />
+   </tabs>
+</PreferenceScreen>
