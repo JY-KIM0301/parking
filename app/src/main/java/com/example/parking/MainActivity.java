@@ -8,7 +8,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.PointF;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,13 +21,15 @@ import com.naver.maps.map.MapFragment;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.UiSettings;
+import com.naver.maps.map.overlay.InfoWindow;
 import com.naver.maps.map.overlay.Marker;
+import com.naver.maps.map.overlay.Overlay;
 import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.util.FusedLocationSource;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
-public class MainActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MainActivity extends FragmentActivity implements Overlay.OnClickListener, OnMapReadyCallback {
     private static final int ACCESS_LOCATION_PERMISSION_REQUEST_CODE = 100;
     private FusedLocationSource locationSource;
 
@@ -33,6 +37,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private FragStar fragStar;
     private FragInfo fragInfo;
     private FragFeedback fragFeedback;
+    private InfoWindow infoWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +93,33 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         marker.setWidth(100); marker.setHeight(140);
         marker.setMap(naverMap);
 
+        marker.setOnClickListener(this);
+
+        infoWindow = new InfoWindow();
+        infoWindow.setAdapter(new InfoWindow.DefaultTextAdapter(this) {
+            @NonNull
+            @Override
+            public CharSequence getText(@NonNull InfoWindow infoWindow) {
+                return "부천남부역공영주차장";
+            }
+        });
     }
+
+    //마커를 클릭했을때 수행되는 부분
+    @Override
+    public boolean onClick(@NonNull Overlay overlay){
+        if (overlay instanceof Marker) {
+            Marker marker = (Marker) overlay;
+            if (marker.getInfoWindow() != null) {
+                infoWindow.close();
+            } else {
+                infoWindow.open(marker);
+            }
+            return true;
+        }
+        return false;
+    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
