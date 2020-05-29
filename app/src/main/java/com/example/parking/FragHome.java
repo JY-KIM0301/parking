@@ -1,3 +1,4 @@
+//홈화면-지도화면으로 돌아가기
 package com.example.parking;
 
 import android.os.Bundle;
