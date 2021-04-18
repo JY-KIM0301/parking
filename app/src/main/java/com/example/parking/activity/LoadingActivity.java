@@ -1,9 +1,11 @@
 //로딩화면
-package com.example.parking;
+package com.example.parking.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.example.parking.R;
 
 public class LoadingActivity extends Activity {
     @Override

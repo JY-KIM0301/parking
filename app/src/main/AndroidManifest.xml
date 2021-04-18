@@ -18,15 +18,15 @@
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="0dn8hzlmfx" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".LoadingActivity"
+        <activity android:name=".activity.AddActivity"/>
+        <activity android:name=".activity.LoadingActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
     </application>
 
